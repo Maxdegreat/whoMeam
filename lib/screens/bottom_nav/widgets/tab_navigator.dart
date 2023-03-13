@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:whomeam/config/custom_router.dart';
 import 'package:whomeam/enums/bottom_nav.dart';
-import 'package:whomeam/screens/feed/feed_home_screen.dart';
+import 'package:whomeam/screens/create_post/create_post.dart';
 
 // this screen can controll how data is loaded on the open of the app by using the chain opperator.
 // for many reasons we will try to not load what we do not nead initally
@@ -44,11 +44,11 @@ class TabNavigator extends StatelessWidget {
 
   Widget _getScreen(BuildContext ctx, BottomNavItem item) {
     switch (item) {
-      case BottomNavItem.feed:
-        return FeedHomeScreen();
+      case BottomNavItem.image:
+        return const CreatePost();
 
       default:
-        return Scaffold();
+        return const Scaffold();
     }
   }
 }

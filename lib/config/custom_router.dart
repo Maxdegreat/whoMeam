@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:whomeam/screens/bottom_nav/nav_screen.dart';
 import 'package:whomeam/screens/create_post/create_post.dart';
-import 'package:whomeam/screens/feed/feed_home_screen.dart';
 import 'package:whomeam/screens/login_screen.dart';
 import 'package:whomeam/screens/splash_screen.dart';
 
@@ -17,8 +16,6 @@ class CustomRouter {
         return LoginScreen.route();
       case NavScreen.routeName:
         return NavScreen.route();
-      case FeedHomeScreen.routeName:
-        return FeedHomeScreen.route();
       case CreatePost.routeName:
         return CreatePost.route();
 

@@ -17,11 +17,11 @@ class NavScreen extends StatelessWidget {
   //navigator keys to maintain current satate across pages
 
   final Map<BottomNavItem, GlobalKey<NavigatorState>> navigatorKeys = {
-    BottomNavItem.feed: GlobalKey<NavigatorState>(),
+    BottomNavItem.image: GlobalKey<NavigatorState>(),
   };
 
   final Map<BottomNavItem, Widget> items = const {
-    BottomNavItem.feed: Icon(Icons.home, size: 20,),
+    BottomNavItem.image: Icon(Icons.home, size: 20,),
   };
 
   @override

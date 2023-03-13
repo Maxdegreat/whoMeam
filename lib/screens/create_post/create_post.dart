@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:whomeam/models/post_model.dart';
+import 'package:whomeam/repository/file_picker.dart';
 import 'package:whomeam/repository/open_ai_repo.dart';
 
 class CreatePost extends StatefulWidget {
@@ -24,6 +26,8 @@ class _CreatePostState extends State<CreatePost> {
   bool canGenerate = false;
   final TextEditingController _promptController = TextEditingController();
   Post post = Post.empty();
+  FilePickerWM fileManager = FilePickerWM();
+  List<File> files = [];
 
   @override
   void dispose() {
@@ -45,7 +49,15 @@ class _CreatePostState extends State<CreatePost> {
             ),
             actions: [
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios))
+                  onPressed: () async {
+                    FilePickerWM.pickFile().then((value) {
+                      if (value != null) {
+                        files.add(value);
+                      }
+                    });
+                  },
+                  icon: const Icon(Icons.file_upload_sharp)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.download))
             ],
           ),
           body: Padding(
@@ -80,17 +92,30 @@ class _CreatePostState extends State<CreatePost> {
                           ),
                         ),
                       )),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: PageView.builder(
-                      itemCount: post.dalleArtUrls.length,
-                      itemBuilder: (context, index) {
-                        return post.dalleArtUrls.isNotEmpty
-                            ? Image.network(post.dalleArtUrls[index])
-                            : const SizedBox.shrink();
-                      },
-                    ),
-                  )
+                  if (post.dalleArtUrls.isNotEmpty) ...[
+                    Container(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: PageView.builder(
+                        itemCount: post.dalleArtUrls.length,
+                        itemBuilder: (context, index) {
+                          return post.dalleArtUrls.isNotEmpty
+                              ? Image.network(post.dalleArtUrls[index])
+                              : const SizedBox.shrink();
+                        },
+                      ),
+                    )
+                  ] else ...[
+                    Container(
+                      height: MediaQuery.of(context).size.height / 2,
+                      color: Colors.grey[300],
+                      child: const Center(
+                          child: Text(
+                        "Import Selfies to animate OR type text to use DALL-E's API to generate an image",
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.center,
+                      )),
+                    )
+                  ]
                 ],
               ),
             ),

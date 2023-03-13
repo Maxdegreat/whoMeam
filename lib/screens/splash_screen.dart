@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:whomeam/screens/bottom_nav/nav_screen.dart';
-import 'package:whomeam/screens/feed/feed_home_screen.dart';
+import 'package:whomeam/screens/create_post/create_post.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String routeName = '/splash';
@@ -20,7 +19,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      Navigator.pushNamed(context, FeedHomeScreen.routeName);
+      Navigator.pushNamed(context, CreatePost.routeName);
     });
 
     return WillPopScope(

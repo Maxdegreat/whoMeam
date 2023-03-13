@@ -7,7 +7,7 @@ part 'bottomnav_state.dart';
 class BottomnavCubit extends Cubit<BottomnavState> {
   BottomnavCubit()
       : super(const BottomnavState(
-            selectedItem: BottomNavItem.feed, showBottomNav: true));
+            selectedItem: BottomNavItem.image, showBottomNav: true));
 
   void showBottomNav(bool b) => emit(state.copyWith(showBottomNav: b));
 
