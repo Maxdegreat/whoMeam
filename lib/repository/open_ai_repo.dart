@@ -3,7 +3,7 @@ import 'package:openai_client/openai_client.dart';
 
 // Create the configuration
 const conf = OpenAIConfiguration(
-  apiKey: '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',
+  apiKey: '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',
   // organizationId: 'newart',
 );
 

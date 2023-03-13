@@ -17,6 +17,10 @@ class CustomRouter {
         return LoginScreen.route();
       case NavScreen.routeName:
         return NavScreen.route();
+      case FeedHomeScreen.routeName:
+        return FeedHomeScreen.route();
+      case CreatePost.routeName:
+        return CreatePost.route();
 
       default:
         return _errorRoute();

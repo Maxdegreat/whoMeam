@@ -81,17 +81,15 @@ class _CreatePostState extends State<CreatePost> {
                         ),
                       )),
                   Container(
-                    height: 512,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Theme.of(context).colorScheme.secondary,
-                        image: post.dalleArtUrls.isNotEmpty
-                            ? DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    post.dalleArtUrls.first))
-                            : null),
-                    // child: Text(post.dalleArtUrls.toString()),
+                    height: MediaQuery.of(context).size.height / 2,
+                    child: PageView.builder(
+                      itemCount: post.dalleArtUrls.length,
+                      itemBuilder: (context, index) {
+                        return post.dalleArtUrls.isNotEmpty
+                            ? Image.network(post.dalleArtUrls[index])
+                            : const SizedBox.shrink();
+                      },
+                    ),
                   )
                 ],
               ),
@@ -152,7 +150,8 @@ class _CreatePostState extends State<CreatePost> {
         TextButton(
             onPressed: () {
               try {
-                if (_promptController.text.isNotEmpty && post.dalleArtUrls.isEmpty) {
+                if (_promptController.text.isNotEmpty &&
+                    post.dalleArtUrls.isEmpty) {
                   context
                       .read<OpenaiRepo>()
                       .createImage(prompt: _promptController.text)
@@ -166,6 +165,7 @@ class _CreatePostState extends State<CreatePost> {
                       }
                     }
                   });
+                  // add to the app state post
                 }
               } catch (e) {
                 log("error in CreatePost: $e");

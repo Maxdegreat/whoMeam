@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:whomeam/config/paths.dart';
 import 'package:whomeam/models/user_model.dart';
@@ -45,32 +45,6 @@ class Post extends Equatable {
         metadata: metadata ?? this.metadata);
   }
 
-  Map<String, dynamic> toDoc() {
-    return {
-      'author':
-          FirebaseFirestore.instance.collection(Paths.users).doc(author.id),
-      'dalleArtUrls': dalleArtUrls,
-      'likes': 0,
-      'commentCount': 0,
-      'metadata': {},
-    };
-  }
 
-  static Future<Post?> fromDoc(DocumentSnapshot doc) async {
-    final data = doc.data() as Map<String, dynamic>;
-    final authorRef = data['author'] as DocumentReference?;
 
-    if (authorRef != null) {
-      var authorDoc = await authorRef.get();
-      if (authorDoc.data() != null) {
-        return Post(
-            author: Userm.fromDoc(authorDoc),
-            dalleArtUrls: List.from(data['dalleArtUrls']),
-            likes: data['likes'],
-            commentCount: data['commentCount'],
-            metadata: Map<String, dynamic>.from(data['metadata']));
-      }
-    }
-    return null;
-  }
 }

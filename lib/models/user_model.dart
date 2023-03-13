@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Userm extends Equatable {
@@ -113,39 +112,4 @@ class Userm extends Equatable {
     };
   }
 
-  factory Userm.getId(DocumentSnapshot doc) {
-    // ignore: no_leading_underscores_for_local_identifiers
-    final _data = doc.data() as Map<String, dynamic>;
-    return Userm(
-      id: doc.id,
-      username: '',
-      usernameSearchCase: const [],
-      email: '',
-      token: const [],
-      bio: 'bio',
-      profileImageUrl: '',
-      bannerImageUrl: '',
-      following: 0,
-      meamers: 0,
-      data: const {}
-    );
-  }
-
-  factory Userm.fromDoc(DocumentSnapshot doc) {
-    // ignore: no_leading_underscores_for_local_identifiers
-    final _data = doc.data() as Map<String, dynamic>;
-    return Userm(
-        id: doc.id,
-        username: _data['username'] ?? '',
-        usernameSearchCase:
-            List<String>.from(_data['usernameSearchCase'] ?? []),
-        email: _data['email'] ?? '',
-        profileImageUrl: _data['profileImageUrl'] ?? '',
-        bannerImageUrl: _data['bannerImageUrl'] ?? '',
-        bio: _data['bio'] ?? '',
-        following: (_data['following'] ?? 0).toInt(),
-        meamers: (_data['meamers'] ?? 0).toInt(),
-        token: List<String>.from(_data['token']),
-        data: Map<String, dynamic>.from(_data['data']));
-  }
 }

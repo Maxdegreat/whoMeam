@@ -2,9 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:whomeam/repository/auth_repo.dart';
+import 'package:whomeam/screens/splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -52,11 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   onPressed: () async {
-                    try {
-                      context.read<AuthRepository>().signInWithGoogle();
-                    } catch (e) {
-                      log(e.toString());
-                    }
+                    Navigator.of(context).pushNamed(SplashScreen.routeName);
                   },
                 ),
                 ElevatedButton(
@@ -65,11 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   onPressed: () async {
-                    try {
-                      context.read<AuthRepository>().signInWithApple(context);
-                    } catch (e) {
-                      log(e.toString());
-                    }
+                    Navigator.of(context).pushNamed(SplashScreen.routeName);
                   },
                 ),
               ],
